@@ -10,13 +10,15 @@ PRICE_EXEC			 = $(TARGET)/pricing
 AFOPT_EXEC			 = $(TARGET)/afoptions
 EXAMPLE_EXEC		 = $(TARGET)/example
 FFT_EXEC				 = $(TARGET)/fft
+AF_PATH          ?=/usr/local
+CUDA_PATH        ?=/usr/local/cuda
 
 COMPILER         = -c++
 OPTIMIZATION_OPT = -O2 -O3
-INCLUDE_DIR      = -I $(SOURCES_DIR)
+INCLUDE_DIR      = -I $(SOURCES_DIR) -I$(AF_PATH)/include
 BASE_OPTIONS     = -std=c++11
 OPTIONS          = $(BASE_OPTIONS) $(OPTIMIZATION_OPT) $(INCLUDE_DIR)
-LINKER_OPT       = -L/usr/lib -L/usr/local/lib -lstdc++ -lafcuda
+LINKER_OPT       = -L$(AF_PATH)/lib -lafcuda -L$(CUDA_PATH)/nvvm/lib64 -lnvvm
 
 
 all: chapter1 afexample
